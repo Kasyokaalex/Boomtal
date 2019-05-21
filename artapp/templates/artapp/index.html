@@ -1,0 +1,31 @@
+{% extends 'artapp/base.html' %}
+{% block content%}
+<div class="container-fluid">
+    <div class="row">
+        <h3 class="text-center text-primary">My Art</h3>
+        {% if arts %}
+        {% for art in arts %}
+            <div class="col-sm-3">
+                <div class="thumbnail">
+                    <img src="{{ art.file.url }}" class="img img-responsive img img-circle" style="height: 250px; width: 200px"/>
+                    <div class="caption">
+
+                        <h4>{{art.name }}</h4>
+                         <form method="post" action="">
+                            {% csrf_token %}
+                            <input type="hidden" name="album_id" value="{{ album.id }}">
+                            <a href="{% url 'artapp:deleteart' art.id %}">
+                            <span class="glyphicon glyphicon-trash"></span>
+                            </a>&nbsp;&nbsp;
+                            <a href="{% url 'artapp:updateart' art.id %}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor%}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

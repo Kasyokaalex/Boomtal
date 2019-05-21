@@ -1,0 +1,11 @@
+{% include 'vidapp/base.html'%}
+
+<form method="post">
+    <div class="row">
+    <div class="col-sm-4"></div>
+    {% csrf_token %}
+    <h4 style="font-family: 'Lucida Calligraphy';color: brown">Are you sure you want to delete?</h4>
+
+    <button type="submit" class="btn btn-danger">OK</button>
+    </div>
+</form>

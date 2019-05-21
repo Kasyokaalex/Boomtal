@@ -1,0 +1,39 @@
+{% extends 'bomtalapp/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'bomtalapp/css/style.css'%}"/>
+<div class="container-fluid">
+    <div class="row">
+        <h3 class="text-center text-primary">
+            {{ request.user.username }} <b>Albums</b>
+            <hr>
+        </h3>
+        {% if albums %}
+            {% for album in albums %}
+        <div class="col-sm-3">
+            <div class="thumbnail">
+                <a href="{% url 'bomtalapp:detail' album.id %}">
+                <img src="{{ album.cover.url }}" class="img img-responsive" style="height: 250px; width: 200px;" alt="">
+                </a>
+                    <div class="caption">
+                    <h4>{{ video.name }}</h4>
+
+                        <form method="post" action="{% url 'bomtalapp:delete_album' album.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="album_id" value="{{ album.id }}">
+                            <a href="{% url 'bomtalapp:delete_album' album.id %}">
+                            <span class="glyphicon glyphicon-trash"></span>
+                            </a>&nbsp;&nbsp;
+                            <a href="">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </form>
+                </div>
+            </div>
+        </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
